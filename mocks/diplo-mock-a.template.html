@@ -1,0 +1,451 @@
+<title>DIPLO — Where Initiative Becomes Capability</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @font-face{font-family:'Saira Condensed';font-style:normal;font-weight:600;src:url(data:font/woff2;base64,@@SC600@@) format('woff2');}
+  @font-face{font-family:'Saira Condensed';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,@@SC700@@) format('woff2');}
+  @font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:100 700;src:url(data:font/woff2;base64,@@PLEX@@) format('woff2');}
+  @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;src:url(data:font/woff2;base64,@@MONO@@) format('woff2');}
+
+  :root{
+    --ink:#08090B;
+    --ink-2:#0E1013;
+    --ink-3:#13161A;
+    --champ:#C9BFAE;
+    --champ-bright:#E9E2D2;
+    --stone:#8E8779;
+    --body:#C4BDAE;
+    --hairline:rgba(201,191,174,.16);
+    --hairline-soft:rgba(201,191,174,.09);
+    --display:'Saira Condensed',Arial Narrow,sans-serif;
+    --sans:'IBM Plex Sans',Segoe UI,sans-serif;
+    --mono:'IBM Plex Mono',Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:96px;}
+  body{background:var(--ink);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--champ);color:var(--ink);}
+
+  .eyebrow{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--champ);display:flex;align-items:center;gap:12px;}
+  .eyebrow::before{content:"";width:30px;height:5px;flex:none;background:
+    radial-gradient(circle 2.5px at calc(100% - 2.5px) 50%, var(--champ) 98%, transparent),
+    linear-gradient(var(--champ),var(--champ)) 0 50%/24px 1px no-repeat;}
+
+  /* ---------- nav ---------- */
+  nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:20px;padding:16px 6vw;transition:background .35s,border-color .35s;border-bottom:1px solid transparent;}
+  nav.scrolled{background:rgba(8,9,11,.82);backdrop-filter:blur(14px) saturate(1.1);border-bottom-color:var(--hairline-soft);}
+  .nav-brand{display:flex;align-items:center;gap:14px;}
+  .nav-brand img{height:36px;width:auto;mix-blend-mode:screen;}
+  .nav-brand .wordmark{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:.14em;color:var(--champ-bright);}
+  .nav-brand .expansion{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--stone);text-transform:uppercase;border-left:1px solid var(--hairline);padding-left:14px;line-height:1.7;}
+  .nav-links{margin-left:auto;display:flex;align-items:center;gap:34px;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;}
+  .nav-links a{color:var(--stone);transition:color .2s;}
+  .nav-links a:hover{color:var(--champ-bright);}
+  .nav-links .nav-cta{border:1px solid var(--champ);color:var(--champ);padding:9px 18px;}
+  .nav-links .nav-cta:hover{background:var(--champ);color:var(--ink);}
+  @media(max-width:900px){.nav-brand .expansion{display:none}.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---------- hero ---------- */
+  header{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 42%;}
+  .hero-shade{position:absolute;inset:0;background:
+    linear-gradient(78deg, rgba(8,9,11,.94) 8%, rgba(8,9,11,.62) 44%, rgba(8,9,11,.18) 72%, rgba(8,9,11,.28) 100%);}
+  .hero-fade{position:absolute;inset:auto 0 0 0;height:34vh;background:linear-gradient(rgba(8,9,11,0),var(--ink));}
+  .hero-inner{position:relative;z-index:2;padding:120px 6vw 13vh;max-width:1160px;}
+  h1{font-family:var(--display);font-weight:700;font-size:clamp(54px,8.4vw,118px);line-height:.94;letter-spacing:.015em;text-transform:uppercase;color:var(--champ-bright);margin:26px 0 28px;text-wrap:balance;}
+  h1 em{font-style:normal;color:var(--champ);}
+  .hero-sub{max-width:560px;font-size:17.5px;color:var(--body);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px;}
+  .btn{display:inline-block;font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;padding:17px 34px;transition:.2s;cursor:pointer;}
+  .btn-solid{background:var(--champ);color:var(--ink);border:1px solid var(--champ);}
+  .btn-solid:hover{background:var(--champ-bright);border-color:var(--champ-bright);}
+  .btn-ghost{border:1px solid var(--hairline);color:var(--champ-bright);}
+  .btn-ghost:hover{border-color:var(--champ);color:var(--champ);}
+
+  /* ---------- sections ---------- */
+  section{padding:110px 6vw;}
+  .measure{max-width:1240px;margin:0 auto;}
+
+  /* industry strip */
+  .industry{border-top:1px solid var(--hairline-soft);border-bottom:1px solid var(--hairline-soft);padding:64px 6vw;text-align:center;}
+  .industry .eyebrow{justify-content:center;}
+  .industry .eyebrow::after{content:"";width:30px;height:5px;flex:none;background:
+    radial-gradient(circle 2.5px at 2.5px 50%, var(--champ) 98%, transparent),
+    linear-gradient(var(--champ),var(--champ)) 100% 50%/24px 1px no-repeat;}
+  .industry .eyebrow::before{background:
+    radial-gradient(circle 2.5px at 2.5px 50%, var(--champ) 98%, transparent),
+    linear-gradient(var(--champ),var(--champ)) 100% 50%/24px 1px no-repeat;transform:scaleX(-1);}
+  .industry-names{display:flex;flex-wrap:wrap;justify-content:center;column-gap:56px;row-gap:18px;margin:38px auto 30px;max-width:1000px;}
+  .industry-names span{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:.14em;text-transform:uppercase;color:#6E6858;transition:color .25s;}
+  .industry-names span:hover{color:var(--champ-bright);}
+  .industry small{display:block;max-width:680px;margin:0 auto;font-size:11.5px;line-height:1.7;color:#5D584C;}
+
+  /* who we are */
+  .who-grid{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:start;}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(36px,4.2vw,58px);line-height:1.02;letter-spacing:.02em;text-transform:uppercase;color:var(--champ-bright);margin-top:24px;text-wrap:balance;}
+  .who-copy p{margin-bottom:22px;max-width:62ch;}
+  .who-copy .standalone{font-family:var(--display);font-weight:600;font-size:24px;line-height:1.25;letter-spacing:.03em;color:var(--champ);margin:34px 0 0;}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:84px;}
+  .pillar{position:relative;background:var(--ink-2);border:1px solid var(--hairline-soft);padding:36px 32px;}
+  .pillar::before{content:"";position:absolute;top:-1px;left:-1px;width:16px;height:16px;border-top:2px solid var(--champ);border-left:2px solid var(--champ);}
+  .pillar h3{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--champ);margin-bottom:14px;}
+  .pillar p{font-size:15px;color:var(--stone);}
+
+  /* stats */
+  .stats{border-top:1px solid var(--hairline-soft);}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;}
+  .stat{padding:8px 36px;border-left:1px solid var(--hairline-soft);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .n{font-family:var(--display);font-weight:700;font-size:76px;line-height:1;color:var(--champ-bright);}
+  .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-top:12px;line-height:1.8;}
+  .stats-note{margin-top:52px;max-width:560px;font-size:14.5px;color:var(--stone);}
+
+  /* form */
+  .register{border-top:1px solid var(--hairline-soft);}
+  .register .lede{max-width:520px;margin:20px 0 0;}
+  form{margin-top:54px;max-width:900px;display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .field{display:flex;flex-direction:column;gap:9px;}
+  .field.full{grid-column:1/-1;}
+  label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);}
+  label .req{color:var(--champ);}
+  input,select,textarea{background:var(--ink-2);border:1px solid var(--hairline);color:var(--champ-bright);font-family:var(--sans);font-size:15.5px;padding:15px 16px;transition:border-color .2s;border-radius:0;appearance:none;}
+  select{background-image:linear-gradient(45deg,transparent 50%,var(--stone) 50%),linear-gradient(135deg,var(--stone) 50%,transparent 50%);background-position:calc(100% - 21px) 50%,calc(100% - 16px) 50%;background-size:5px 5px;background-repeat:no-repeat;}
+  textarea{min-height:132px;resize:vertical;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--champ);}
+  .form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:26px;margin-top:8px;}
+  .privacy{font-size:12.5px;color:#5D584C;max-width:340px;line-height:1.6;}
+  .form-success{grid-column:1/-1;display:none;border-left:2px solid var(--champ);background:var(--ink-2);padding:24px 28px;font-size:15.5px;color:var(--champ-bright);}
+  form.sent .form-success{display:block;}
+  form.sent .form-foot,form.sent .field{display:none;}
+  .toggle-field{gap:12px;}
+  .seg{display:inline-flex;border:1px solid var(--hairline);width:fit-content;}
+  .seg-btn{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:13px 24px;background:transparent;color:var(--stone);border:none;cursor:pointer;transition:background .2s,color .2s;}
+  .seg-btn+.seg-btn{border-left:1px solid var(--hairline);}
+  .seg-btn.active{background:var(--champ);color:var(--ink);}
+  .seg-btn:hover:not(.active){color:var(--champ-bright);}
+  #eoi[data-role="student"] .role-industry{display:none;}
+  #eoi[data-role="industry"] .role-student{display:none;}
+  .lede-note{max-width:640px;margin:18px 0 0;font-size:13.5px;line-height:1.7;color:#6E6858;}
+  .phone-wrap{display:flex;gap:10px;}
+  .phone-wrap select{width:110px;flex:none;}
+  .phone-wrap input{flex:1;min-width:0;}
+  .lrow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .chip-count{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5D584C;margin-left:auto;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--hairline);background:transparent;color:var(--stone);padding:10px 16px;cursor:pointer;transition:.2s;}
+  .chip:hover:not(.on){color:var(--champ-bright);border-color:rgba(201,191,174,.35);}
+  .chip.on{background:var(--champ);color:var(--ink);border-color:var(--champ);}
+  .chips.maxed .chip:not(.on){opacity:.35;pointer-events:none;}
+  .chip-group{border-top:1px solid var(--hairline-soft);padding-top:16px;margin-top:12px;}
+  .chip-group:first-of-type{border-top:none;padding-top:4px;margin-top:2px;}
+  .chip-group .glabel{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--champ);margin-bottom:10px;}
+
+  /* footer */
+  footer{border-top:1px solid var(--hairline-soft);padding:80px 6vw 46px;}
+  .foot-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:60px;align-items:start;}
+  .foot-brand img{width:130px;mix-blend-mode:screen;margin-left:-10px;}
+  .foot-tag{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--champ);margin-top:6px;}
+  .foot-mid{font-size:12px;line-height:1.8;color:#5D584C;max-width:520px;}
+  .foot-links{display:flex;flex-direction:column;gap:12px;font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;}
+  .foot-links a{color:var(--stone);}  .foot-links a:hover{color:var(--champ-bright);}
+  .foot-base{max-width:1240px;margin:56px auto 0;padding-top:22px;border-top:1px solid var(--hairline-soft);display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#4E4A40;}
+
+  /* audiences */
+  .aud{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:60px;}
+  .aud h3{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:var(--champ);display:flex;align-items:center;gap:16px;margin-bottom:4px;}
+  .aud h3::after{content:"";flex:1;height:1px;background:var(--hairline-soft);}
+  .aud .item{border-top:1px solid var(--hairline-soft);padding:18px 0;font-size:15px;color:var(--stone);}
+  .aud .item:first-of-type{border-top:none;}
+  .aud .item strong{color:var(--champ-bright);font-weight:600;}
+
+  /* motion */
+  .hero-img{animation:kb 22s ease-out forwards;transform-origin:62% 38%;}
+  @keyframes kb{from{transform:scale(1.07)}to{transform:scale(1)}}
+  .hero-inner>*{opacity:0;transform:translateY(20px);animation:rise .9s cubic-bezier(.2,.6,.2,1) forwards;}
+  .hero-inner>*:nth-child(1){animation-delay:.1s}
+  .hero-inner>*:nth-child(2){animation-delay:.3s}
+  .hero-inner>*:nth-child(3){animation-delay:.52s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .pillar{transition:transform .35s ease,border-color .35s ease,background .35s ease;}
+  .pillar:hover{transform:translateY(-5px);border-color:rgba(201,191,174,.35);background:var(--ink-3);}
+  .pillar::before{transition:width .35s ease,height .35s ease;}
+  .pillar:hover::before{width:26px;height:26px;}
+
+  /* glass register panel over dimmed imagery */
+  .register{position:relative;overflow:hidden;}
+  .register-bg{position:absolute;inset:0;background-position:center 30%;background-size:cover;opacity:.09;filter:saturate(.55);}
+  .register-veil{position:absolute;inset:0;background:linear-gradient(rgba(8,9,11,.35),var(--ink) 94%);}
+  .register .measure{position:relative;}
+  #eoi{background:rgba(14,16,19,.55);backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1);border:1px solid var(--hairline-soft);padding:44px;}
+  @media(max-width:960px){#eoi{padding:26px 20px;}.aud{grid-template-columns:1fr;gap:36px;}}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease;}
+  .rv.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.hero-img,.hero-inner>*{animation:none;opacity:1;transform:none}}
+
+  @media(max-width:960px){
+    .who-grid{grid-template-columns:1fr;gap:40px;}
+    .pillars{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;row-gap:44px;}
+    .stat:nth-child(3){border-left:none;padding-left:0;}
+    form{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;gap:36px;}
+    section{padding:80px 6vw;}
+  }
+  @media(max-width:560px){
+    h1{font-size:clamp(42px,13vw,54px);}
+    .hero-sub{font-size:16px;}
+    .stats-grid{grid-template-columns:1fr;row-gap:36px;}
+    .stat{border-left:none;padding:0;}
+    .stat .n{font-size:64px;}
+    .hero-actions .btn{width:100%;text-align:center;}
+    .industry-names{column-gap:34px;}
+  }
+</style>
+
+<nav id="nav">
+  <a class="nav-brand" href="#top">
+    <img src="data:image/jpeg;base64,@@MARK@@" alt="DIPLO mark">
+    <span class="wordmark">DIPLO</span>
+    <span class="expansion">Defence Industry Pathway<br>&amp; Leadership Outreach</span>
+  </a>
+  <div class="nav-links">
+    <a href="#who">Who we are</a>
+    <a href="#program">The program</a>
+    <a class="nav-cta" href="#register">Register interest</a>
+  </div>
+</nav>
+
+<header id="top">
+  <img class="hero-img" src="data:image/jpeg;base64,@@HERO@@" alt="Two F-35 Lightning II aircraft in formation over a coastline">
+  <div class="hero-shade"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <h1>Where initiative becomes <em>capability.</em></h1>
+    <p class="hero-sub">DIPLO connects university students with Australia's defence industry, building the project discipline that regulated delivery environments demand, before you graduate.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#register">Register your interest</a>
+      <a class="btn btn-ghost" href="#who">Who we are</a>
+    </div>
+  </div>
+</header>
+
+<div class="industry rv">
+  <div class="eyebrow" style="display:inline-flex;">The industry our students prepare for</div>
+  <div class="industry-names">
+    <span>BAE Systems</span><span>Babcock</span><span>KBR</span><span>Lockheed Martin</span><span>Aurecon</span><span>ASC</span>
+  </div>
+  <small>Names indicate the sector DIPLO prepares students for. DIPLO is an independent, student-led educational initiative and is not affiliated with, or endorsed by, any organisation shown or the Department of Defence.</small>
+</div>
+
+<section id="who">
+  <div class="measure who-grid">
+    <div class="rv">
+      <div class="eyebrow">Who we are</div>
+      <h2>Defence projects don't run on theory.</h2>
+    </div>
+    <div class="who-copy rv">
+      <p><strong style="color:var(--champ-bright)">DIPLO &mdash; Defence Industry Pathway &amp; Leadership Outreach</strong> is a student-led initiative connecting university students from diverse academic disciplines with the practical realities of Australia's defence industry.</p>
+      <p>Through industry briefings, professional workshops, expert panel discussions and scenario-based learning, DIPLO bridges the gap between academic study and professional practice. Participants gain exposure to the professional standards, multidisciplinary collaboration and leadership capabilities that underpin complex, highly regulated defence environments, preparing them to transition confidently from university into industry.</p>
+      <p class="standalone">Students get earlier visibility of the industry. The industry gets earlier visibility of work-ready students.</p>
+    </div>
+  </div>
+  <div class="measure pillars">
+    <div class="pillar rv"><h3>Industry exposure</h3><p>Connect with defence professionals through industry briefings, expert panels, and networking opportunities. Gain insight into career pathways, multidisciplinary collaboration and the expectations of organisations operating across Australia's defence sector.</p></div>
+    <div class="pillar rv"><h3>Professional capability</h3><p>Develop the practical skills that underpin successful defence careers, including governance, communication, critical thinking, teamwork, decision-making and working within structured, highly regulated environments through realistic, industry-led scenarios.</p></div>
+    <div class="pillar rv"><h3>Leadership &amp; outreach</h3><p>Build confidence in stakeholder engagement, professional conduct and leadership while contributing to a growing community that connects students, universities, and industry across a broad range of disciplines.</p></div>
+  </div>
+</section>
+
+<section id="program" class="stats">
+  <div class="measure">
+    <div class="rv">
+      <div class="eyebrow">What DIPLO delivers</div>
+      <h2>Ready students. A smarter pipeline.</h2>
+    </div>
+    <div class="aud rv">
+      <div>
+        <h3>For students</h3>
+        <div class="item"><strong>Develop industry-ready capability.</strong> Build the professional skills expected across the defence sector, including communication, collaboration, governance, critical thinking, and professional judgement through practical, scenario-based learning.</div>
+        <div class="item"><strong>Learn directly from industry.</strong> Engage with defence professionals through briefings, workshops and expert panels that provide insight into real projects, career pathways and the expectations of complex, multidisciplinary organisations.</div>
+        <div class="item"><strong>Build your professional network early.</strong> Establish meaningful connections with industry before graduation, demonstrate initiative beyond the classroom and position yourself for future opportunities across Australia's defence sector.</div>
+      </div>
+      <div>
+        <h3>For industry partners</h3>
+        <div class="item"><strong>Engage with emerging talent.</strong> Connect with motivated students from engineering, project management, cyber security, business, information technology, law, logistics, finance, and other disciplines before they enter the graduate market.</div>
+        <div class="item"><strong>A structured, low-commitment partnership.</strong> Contribute through industry briefings, workshops or panel discussions designed around your expertise, with clear objectives, minimal preparation, and no recruitment obligation.</div>
+        <div class="item"><strong>Strengthen tomorrow's workforce.</strong> Support the development of career-ready graduates by helping bridge the gap between university education and the professional expectations of Australia's defence industry.</div>
+      </div>
+    </div>
+    <div class="stats-grid rv">
+      <div class="stat"><div class="n" data-n="2">2</div><div class="l">Student-facing activities in every program cycle</div></div>
+      <div class="stat"><div class="n" data-n="3">3</div><div class="l">Senior industry contributors at the launch event &mdash; two at director level</div></div>
+      <div class="stat"><div class="n" data-n="42">42</div><div class="l">Students registered for the first activity</div></div>
+    </div>
+    <p class="stats-note rv">Every activity is planned, risk-managed and evaluated with the same discipline the program teaches.</p>
+  </div>
+</section>
+
+<section id="register" class="register">
+  <div class="register-bg" aria-hidden="true"></div>
+  <div class="register-veil" aria-hidden="true"></div>
+  <div class="measure">
+    <div class="rv">
+      <div class="eyebrow">Expression of interest</div>
+      <h2>Be first in the room.</h2>
+      <p class="lede">Join the DIPLO community and be among the first to hear about upcoming industry briefings, workshops, and networking events.</p>
+      <p class="lede-note">Students who consistently demonstrate initiative, professionalism and engagement may be invited to contribute to the program itself &mdash; supporting event delivery, industry engagement and future initiatives. These opportunities are selective and designed to provide meaningful leadership and professional experience alongside your studies.</p>
+    </div>
+    <form id="eoi" class="rv" data-role="student" novalidate>
+      <div class="field full toggle-field">
+        <label>I'm registering as</label>
+        <div class="seg" role="radiogroup" aria-label="Registering as">
+          <button type="button" class="seg-btn active" data-role="student">Student</button>
+          <button type="button" class="seg-btn" data-role="industry">Industry professional</button>
+        </div>
+      </div>
+      <div class="field"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-phone">Phone (optional)</label>
+        <div class="phone-wrap">
+          <select id="f-cc" aria-label="Country code"><option selected>+61</option><option>+64</option><option>+44</option><option>+1</option><option>+65</option><option>+91</option><option>Other</option></select>
+          <input id="f-phone" type="tel" autocomplete="tel" placeholder="4XX XXX XXX">
+        </div>
+      </div>
+      <div class="field role-student"><label for="f-degree">University &amp; degree</label><input id="f-degree" type="text" placeholder="e.g. Adelaide University — B. Project Management"></div>
+      <div class="field role-student"><label for="f-year">Year level</label><select id="f-year"><option>First year</option><option>Second year</option><option selected>Third year</option><option>Final year</option><option>Postgraduate</option></select></div>
+      <div class="field role-industry"><label for="f-org">Organisation</label><input id="f-org" type="text" placeholder="e.g. BAE Systems Australia"></div>
+      <div class="field role-industry"><label for="f-role-title">Role / job title</label><input id="f-role-title" type="text" placeholder="e.g. Project Engineer"></div>
+      <div class="field role-industry"><label for="f-expertise">Primary area of expertise</label><select id="f-expertise"><option>Project &amp; Program Management</option><option>Systems Engineering</option><option>Mechanical Engineering</option><option>Electrical &amp; Electronics Engineering</option><option>Software Engineering</option><option>Cyber Security</option><option>Information Technology</option><option>Defence Capability</option><option>Commercial &amp; Procurement</option><option>Finance</option><option>Risk &amp; Governance</option><option>Quality Assurance</option><option>Integrated Logistics Support</option><option>Supply Chain &amp; Logistics</option><option>Manufacturing</option><option>Aviation</option><option>Maritime</option><option>Space</option><option>Research &amp; Development</option><option>Strategy &amp; Policy</option><option>Human Resources</option><option>Other</option></select></div>
+      <div class="field role-student full">
+        <div class="lrow"><label>Professional interests &mdash; select up to 3</label><span class="chip-count" id="chip-count">0 of 3 selected</span></div>
+        <div class="chips" id="interest-chips">
+          <button type="button" class="chip">Leadership</button><button type="button" class="chip">Public Speaking</button><button type="button" class="chip">Project Delivery</button><button type="button" class="chip">Defence Technology</button><button type="button" class="chip">Engineering</button><button type="button" class="chip">Aviation</button><button type="button" class="chip">Maritime</button><button type="button" class="chip">Space</button><button type="button" class="chip">Cyber Security</button><button type="button" class="chip">Artificial Intelligence</button><button type="button" class="chip">Commercial &amp; Procurement</button><button type="button" class="chip">Strategy &amp; Policy</button><button type="button" class="chip">Logistics</button><button type="button" class="chip">Risk &amp; Governance</button><button type="button" class="chip">Networking</button><button type="button" class="chip">Event Delivery</button><button type="button" class="chip">Ownership</button>
+        </div>
+      </div>
+      <div class="field role-industry full">
+        <label>How would you like to be involved</label>
+        <div class="chip-group"><span class="glabel">Industry engagement</span><div class="chips inv-chips"><button type="button" class="chip">Speak at a briefing or panel</button><button type="button" class="chip">Deliver a workshop</button><button type="button" class="chip">Host a site visit</button></div></div>
+        <div class="chip-group"><span class="glabel">Student development</span><div class="chips inv-chips"><button type="button" class="chip">Mentor students</button><button type="button" class="chip">Participate in networking events</button><button type="button" class="chip">Support case studies or scenario sessions</button></div></div>
+        <div class="chip-group"><span class="glabel">Partnership</span><div class="chips inv-chips"><button type="button" class="chip">Explore an ongoing partnership</button><button type="button" class="chip">Sponsor an initiative or event</button><button type="button" class="chip">Join the advisory network</button></div></div>
+        <div class="chip-group"><span class="glabel">Updates</span><div class="chips inv-chips"><button type="button" class="chip">Keep me informed about DIPLO</button></div></div>
+      </div>
+      <div class="field full"><label for="f-msg" id="f-msg-label">Tell us a little about yourself (optional)</label><textarea id="f-msg"></textarea></div>
+      <div class="form-foot">
+        <button class="btn btn-solid" type="submit">Register my interest</button>
+        <p class="privacy">Everyone who registers receives a follow-up from the DIPLO team.</p>
+      </div>
+      <div class="form-success"><strong>Registered.</strong> The DIPLO team will follow up with you shortly.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="data:image/jpeg;base64,@@STACKED@@" alt="DIPLO — Defence Industry Pathway & Leadership Outreach">
+    </div>
+    <div class="foot-mid">
+      DIPLO is an independent, student-led educational initiative. It is not affiliated with, or endorsed by, the Department of Defence or any company named on this page, and it does not provide recruitment, internships, security clearances or access to sensitive information.<br><br>
+      Photography: U.S. Air Force / U.S. Marine Corps (public domain), via Wikimedia Commons &mdash; placeholder imagery for concept review.
+    </div>
+    <div class="foot-links">
+      <a href="#who">Who we are</a>
+      <a href="#program">The program</a>
+      <a href="#register">Register interest</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span>&copy; 2026 DIPLO &mdash; Defence Industry Pathway &amp; Leadership Outreach</span>
+    <span>Concept mock A &mdash; dark cinematic &mdash; July 2026</span>
+  </div>
+</footer>
+
+<script>
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  document.querySelector('.register-bg').style.backgroundImage='url("'+document.querySelector('.hero-img').src+'")';
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sio=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return; sio.unobserve(e.target);
+    var el=e.target,t=+el.getAttribute('data-n'),sfx=el.getAttribute('data-suffix')||'';
+    if(reduce){el.textContent=t+sfx;return}
+    var s=performance.now();
+    requestAnimationFrame(function f(now){var p=Math.min((now-s)/1100,1);p=1-Math.pow(1-p,3);el.textContent=Math.round(t*p)+sfx;if(p<1)requestAnimationFrame(f)});
+  })},{threshold:.6});
+  document.querySelectorAll('.stat .n[data-n]').forEach(function(el){el.textContent='0'+(el.getAttribute('data-suffix')||'');sio.observe(el)});
+  (function(){
+    var form=document.getElementById('eoi');
+    var segBtns=form.querySelectorAll('.seg-btn');
+    var msgLabel=document.getElementById('f-msg-label');
+    var msg=document.getElementById('f-msg');
+    var studentPH="What interests you about the defence industry? Are there particular areas you'd like to explore, skills you'd like to develop, or ways you'd like to contribute to DIPLO in the future?";
+    var industryPH="Tell us about your expertise, topics you could speak on, opportunities for collaboration, or any ideas you have for supporting students.";
+    function setRole(role){
+      form.setAttribute('data-role',role);
+      segBtns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-role')===role)});
+      msgLabel.textContent=role==='student'?'Tell us a little about yourself (optional)':"Tell us how you'd like to support DIPLO (optional)";
+      msg.placeholder=role==='student'?studentPH:industryPH;
+    }
+    segBtns.forEach(function(b){b.addEventListener('click',function(){setRole(b.getAttribute('data-role'))})});
+    setRole('student');
+    var chipsWrap=document.getElementById('interest-chips');
+    var count=document.getElementById('chip-count');
+    chipsWrap.addEventListener('click',function(e){
+      var c=e.target.closest('.chip'); if(!c)return;
+      c.classList.toggle('on');
+      var n=chipsWrap.querySelectorAll('.chip.on').length;
+      chipsWrap.classList.toggle('maxed',n>=3);
+      count.textContent=n+' of 3 selected';
+    });
+    document.querySelectorAll('.inv-chips').forEach(function(w){
+      w.addEventListener('click',function(e){var c=e.target.closest('.chip');if(c)c.classList.toggle('on')});
+    });
+  })();
+  /* ─────────────────────────────────────────────────────────────────
+     WHERE REGISTRATIONS ARE SENT
+     Paste the Apps Script web app URL between the quotes below.
+     Leave it empty and the form still works as a demo — it shows the
+     success state but stores nothing.   Setup: form-backend/SETUP.md
+     ───────────────────────────────────────────────────────────────── */
+  var EOI_ENDPOINT = '';
+  /* ───────────────────────────────────────────────────────────────── */
+
+  document.getElementById('eoi').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var form=this;
+    var n=document.getElementById('f-name'),m=document.getElementById('f-email');
+    if(!n.value.trim()){n.focus();n.style.borderColor='#B0563F';return}
+    if(!m.value.trim()||m.value.indexOf('@')<0){m.focus();m.style.borderColor='#B0563F';return}
+
+    var role=form.getAttribute('data-role');
+    function val(id){var el=document.getElementById(id);return el?el.value.trim():''}
+    function chips(sel){return Array.prototype.slice.call(document.querySelectorAll(sel))
+      .map(function(c){return c.textContent.trim()}).join(', ')}
+    var phone=val('f-phone');
+
+    var payload={
+      role:      role==='student'?'Student':'Industry professional',
+      name:      val('f-name'),
+      email:     val('f-email'),
+      phone:     phone?(val('f-cc')+' '+phone):'',
+      degree:    role==='student'?val('f-degree'):'',
+      year:      role==='student'?val('f-year'):'',
+      org:       role==='industry'?val('f-org'):'',
+      title:     role==='industry'?val('f-role-title'):'',
+      expertise: role==='industry'?val('f-expertise'):'',
+      interests: role==='student'?chips('#interest-chips .chip.on'):chips('.inv-chips .chip.on'),
+      message:   val('f-msg')
+    };
+
+    form.classList.add('sent');
+    if(EOI_ENDPOINT){
+      fetch(EOI_ENDPOINT,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)})
+        .catch(function(){/* fire-and-forget: the success state is already shown */});
+    }
+  });
+</script>

@@ -1,0 +1,10 @@
+# The build writes LF. Without this, Git's CRLF conversion would make a freshly
+# built page differ from the committed one on Windows checkouts, and every
+# rebuild would show as a spurious modification.
+* text=auto eol=lf
+
+*.woff2 binary
+*.jpg   binary
+*.png   binary
+*.docx  binary
+*.zip   binary

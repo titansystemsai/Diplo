@@ -1,0 +1,24 @@
+# Client and course documents - kept local, not published to this repo
+Documents/
+
+# Alternate design concepts from the client review round. These remain as
+# built, self-contained files on the local machine; only the selected
+# direction (mock A) is tracked here.
+mocks/diplo-mock-b*
+mocks/diplo-mock-c*
+mocks/README.md
+
+# Build artefact
+mocks/DIPLO-website-mocks.zip
+
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+
+# Office lock files
+~$*.docx
+~$*.xlsx
