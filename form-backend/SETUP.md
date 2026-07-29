@@ -8,8 +8,9 @@ as a row in your sheet automatically.
 ## 1. Create the spreadsheet
 
 Make a new Google Sheet. Name it something like *DIPLO — Registrations*.
-You don't need to add any tabs or headers — the script creates them on the
-first submission.
+You don't need to add any tabs or headers — the script creates a
+**Students** tab and an **Industry** tab, with headers, the first time
+each is needed.
 
 Copy its **ID** from the address bar. It's the long string between
 `/d/` and `/edit`:
@@ -53,7 +54,7 @@ https://script.google.com/macros/s/AKfy..../exec
 
 Back in the Apps Script editor, choose the `setup` function from the
 dropdown and click **Run**. If it completes without error, the script can
-reach your sheet, and the tab and headers now exist.
+reach your sheet, and both tabs and their headers now exist.
 
 ## 5. Point the website at it
 
@@ -70,8 +71,8 @@ Save. Submit the form once and confirm a row appears in the sheet.
 
 ## Changing which sheet responses go to
 
-Edit `SHEET_ID` (different spreadsheet) or `TAB_NAME` (different tab) at
-the top of `Code.gs`, then:
+Edit `SHEET_ID` (different spreadsheet) or `STUDENT_TAB` / `INDUSTRY_TAB`
+(different tab names) at the top of `Code.gs`, then:
 
 **Deploy → Manage deployments → edit the existing deployment (pencil icon)
 → Version: "New version" → Deploy.**
