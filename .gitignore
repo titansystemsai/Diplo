@@ -11,6 +11,9 @@ mocks/README.md
 # Build artefact
 mocks/DIPLO-website-mocks.zip
 
+# Local tool settings, specific to one machine
+.claude/settings.local.json
+
 # OS / editor cruft
 Thumbs.db
 ehthumbs.db
