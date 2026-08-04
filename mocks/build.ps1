@@ -5,6 +5,10 @@
     them with base64-encoded fonts and images from ./assets and writes a single
     standalone .html that opens in any browser with no server and no network.
 
+    Output goes to ../public/index.html. That path is what Cloudflare serves as
+    the asset directory, so the built page is deployed exactly as built - there
+    is no rename or copy step between this script and the live site.
+
     Usage:
         powershell -File build.ps1
 
@@ -39,7 +43,10 @@ function Convert-ToBase64 {
 }
 
 $template = Join-Path $root 'diplo-mock-a.template.html'
-$output   = Join-Path $root 'diplo-mock-a.html'
+$outDir   = Join-Path (Split-Path $root -Parent) 'public'
+$output   = Join-Path $outDir 'index.html'
+
+if (-not (Test-Path $outDir)) { New-Item -ItemType Directory -Path $outDir | Out-Null }
 
 $html = [IO.File]::ReadAllText($template)
 
@@ -55,4 +62,4 @@ $page = "<!doctype html>`n<html lang=`"en`">`n<meta charset=`"utf-8`">`n" + $htm
 [IO.File]::WriteAllText($output, $page, (New-Object System.Text.UTF8Encoding($false)))
 
 $kb = [math]::Round((Get-Item $output).Length / 1KB)
-Write-Output "built diplo-mock-a.html ($kb KB)"
+Write-Output "built public/index.html ($kb KB)"
