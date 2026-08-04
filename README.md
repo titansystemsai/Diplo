@@ -12,10 +12,11 @@ requests.
 
 | Path | What it is |
 |---|---|
-| `mocks/diplo-mock-a.html` | The built page. This is the deployable artefact. |
+| `public/index.html` | The built page. This is the deployable artefact, and the whole of what gets served. |
 | `mocks/diplo-mock-a.template.html` | Editable source, with `@@TOKEN@@` placeholders for embedded assets. |
 | `mocks/assets/` | Fonts and photography inlined at build time. |
 | `mocks/build.ps1` | Inlines the assets and writes the built page. |
+| `wrangler.jsonc` | Cloudflare configuration. Serves `public/` as static assets. |
 | `form-backend/` | Google Apps Script receiver that writes registrations to a Google Sheet. |
 
 ## Building
@@ -32,10 +33,22 @@ page with empty images.
 
 ## Deploying
 
-`diplo-mock-a.html` is the whole site. Any static host works (GitHub Pages,
-Netlify, Cloudflare Pages, or plain file hosting). Most hosts expect the entry
-point to be called `index.html`, so either rename the file on deploy or point
-the host's configuration at it.
+`public/index.html` is the whole site, and it is committed. Deployment copies
+it; nothing is compiled or fetched at deploy time.
+
+The live site is a Cloudflare Worker connected to this repository, configured
+by `wrangler.jsonc` as an assets-only Worker over `public/`. In the Cloudflare
+dashboard:
+
+- **Build command** - leave empty. `mocks/build.ps1` is PowerShell and will not
+  run in Cloudflare's Linux build environment; the page is built locally on
+  Windows and committed instead.
+- **Deploy command** - `npx wrangler deploy`
+
+Because the build writes straight to the directory that gets served, the page
+you open locally is byte-for-byte the page that goes live.
+
+Any other static host works too - point it at `public/` as the site root.
 
 ## Registration form
 

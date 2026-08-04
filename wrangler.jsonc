@@ -1,0 +1,17 @@
+{
+  // Cloudflare Workers deployment for the DIPLO site.
+  //
+  // There is no Worker script - this is an assets-only Worker. Cloudflare
+  // serves ./public directly, and that directory holds exactly one file,
+  // index.html, written by mocks/build.ps1.
+  //
+  // Deploy command in the Cloudflare dashboard is `npx wrangler deploy`.
+  // Leave the build command empty: the page is built on a Windows machine
+  // and committed, and mocks/build.ps1 will not run in Cloudflare's Linux
+  // build environment.
+  "name": "diplo",
+  "compatibility_date": "2026-08-04",
+  "assets": {
+    "directory": "./public"
+  }
+}
