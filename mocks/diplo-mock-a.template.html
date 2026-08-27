@@ -92,6 +92,51 @@
   .pillar h3{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--champ);margin-bottom:14px;}
   .pillar p{font-size:15px;color:var(--stone);}
 
+  /* team */
+  .team{border-top:1px solid var(--hairline-soft);}
+  .team .lede{max-width:620px;margin:20px 0 0;}
+  .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:62px;}
+  .member{display:flex;flex-direction:column;}
+  /* the card is a button so the bio dialog is reachable by keyboard; strip the
+     UA button styling back to nothing and rebuild it as a plain block */
+  .card{display:flex;flex-direction:column;flex:1;width:100%;text-align:left;background:none;border:none;padding:0;font:inherit;color:inherit;}
+  button.card{cursor:pointer;}
+  .card .frame{position:relative;flex:none;overflow:hidden;background:var(--ink-2);border:1px solid var(--hairline-soft);aspect-ratio:3/4;display:block;}
+  .card .frame::before{content:"";position:absolute;z-index:3;top:-1px;left:-1px;width:16px;height:16px;border-top:2px solid var(--champ);border-left:2px solid var(--champ);transition:width .35s ease,height .35s ease;}
+  .card .frame::after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(rgba(8,9,11,0) 55%,rgba(8,9,11,.34));}
+  .card img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:transform .6s ease;}
+  button.card:hover img,button.card:focus-visible img{transform:scale(1.03);}
+  button.card:hover .frame,button.card:focus-visible .frame{border-color:rgba(201,191,174,.35);}
+  button.card:hover .frame::before,button.card:focus-visible .frame::before{width:26px;height:26px;}
+  button.card:focus{outline:none;}
+  button.card:focus-visible .frame{outline:2px solid var(--champ);outline-offset:3px;}
+  .card .name{display:block;font-family:var(--display);font-weight:600;font-size:17px;line-height:1.15;letter-spacing:.09em;text-transform:uppercase;color:var(--champ-bright);margin-top:18px;}
+  .card .role{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);margin-top:7px;margin-bottom:18px;line-height:1.7;}
+  /* the whole card is the button, so this is an affordance rather than a real
+     button - it borrows the ghost-button styling so it reads as one. margin-top
+     auto pins it to the bottom, lining the prompts up across the row however
+     many lines each name and role take */
+  .card .more{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:auto;padding:10px 16px;border:1px solid var(--champ);font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--champ);transition:background .25s,color .25s;}
+  .card .more::after{content:"";width:14px;height:1px;background:currentColor;transition:width .25s;}
+  button.card:hover .more,button.card:focus-visible .more{background:var(--champ);color:var(--ink);}
+  button.card:hover .more::after,button.card:focus-visible .more::after{width:22px;}
+
+  /* bio dialog */
+  .bio-dialog{width:min(680px,92vw);max-height:86vh;padding:0;inset:0;margin:auto;background:var(--ink-2);border:1px solid var(--hairline);color:var(--body);}
+  .bio-dialog::backdrop{background:rgba(4,5,6,.8);}
+  .bio-inner{position:relative;padding:46px 48px 48px;max-height:86vh;overflow-y:auto;}
+  .bio-inner::before{content:"";position:absolute;top:0;left:0;width:18px;height:18px;border-top:2px solid var(--champ);border-left:2px solid var(--champ);}
+  .bio-name{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.4vw,36px);line-height:1.06;letter-spacing:.05em;text-transform:uppercase;color:var(--champ-bright);padding-right:40px;}
+  .bio-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--champ);margin-top:12px;}
+  .bio-copy{margin-top:26px;padding-top:26px;border-top:1px solid var(--hairline-soft);}
+  .bio-copy p{font-size:15.5px;margin-bottom:18px;}
+  .bio-copy p:last-child{margin-bottom:0;}
+  .bio-close{position:absolute;top:16px;right:18px;background:none;border:none;padding:6px 10px;font:400 26px/1 var(--sans);color:var(--stone);cursor:pointer;transition:color .2s;}
+  .bio-close:hover{color:var(--champ-bright);}
+  .bio-close:focus-visible{outline:2px solid var(--champ);outline-offset:2px;color:var(--champ-bright);}
+  @media(max-width:1180px){.team-grid{grid-template-columns:repeat(3,1fr);gap:26px;}}
+  @media(max-width:640px){.bio-inner{padding:38px 24px 32px;}}
+
   /* stats */
   .stats{border-top:1px solid var(--hairline-soft);}
   .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;}
@@ -190,6 +235,7 @@
     .pillars{grid-template-columns:1fr;}
     .stats-grid{grid-template-columns:1fr 1fr;row-gap:44px;}
     .stat:nth-child(3){border-left:none;padding-left:0;}
+    .team-grid{grid-template-columns:1fr 1fr;gap:30px 22px;}
     form{grid-template-columns:1fr;}
     .foot-grid{grid-template-columns:1fr;gap:36px;}
     section{padding:80px 6vw;}
@@ -202,6 +248,11 @@
     .stat .n{font-size:64px;}
     .hero-actions .btn{width:100%;text-align:center;}
     .industry-names{column-gap:34px;}
+    .team-grid{gap:24px 14px;}
+    .card .name{font-size:16px;letter-spacing:.07em;}
+    .card .role{font-size:9.5px;letter-spacing:.13em;margin-bottom:14px;}
+    .card .more{font-size:11px;letter-spacing:.1em;padding:8px 12px;gap:8px;}
+    .card .more::after{width:11px;}
   }
 </style>
 
@@ -213,6 +264,7 @@
   </a>
   <div class="nav-links">
     <a href="#who">Who we are</a>
+    <a href="#team">The team</a>
     <a href="#program">The program</a>
     <a class="nav-cta" href="#register">Register interest</a>
   </div>
@@ -257,6 +309,71 @@
     <div class="pillar rv"><h3>Professional capability</h3><p>Develop the practical skills that underpin successful defence careers, including governance, communication, critical thinking, teamwork, decision-making and working within structured, highly regulated environments through realistic, industry-led scenarios.</p></div>
     <div class="pillar rv"><h3>Leadership &amp; outreach</h3><p>Build confidence in stakeholder engagement, professional conduct and leadership while contributing to a growing community that connects students, universities, and industry across a broad range of disciplines.</p></div>
   </div>
+</section>
+
+<section id="team" class="team">
+  <div class="measure">
+    <div class="rv">
+      <div class="eyebrow">The team</div>
+      <h2>Student-led, industry-facing.</h2>
+      <p class="lede">DIPLO is built and delivered by university students &mdash; the same people who plan each activity, secure the industry contributors and run the program on the day.</p>
+    </div>
+    <div class="team-grid rv">
+      <article class="member">
+        <button class="card" type="button" aria-haspopup="dialog">
+          <span class="frame"><img src="data:image/jpeg;base64,@@TEAM1@@" alt="Abdulkader Jalloul"></span>
+          <span class="name">Abdulkader Jalloul</span>
+          <span class="role">Founder &amp; CEO</span>
+          <span class="more">Read bio</span>
+        </button>
+        <template><p>Abdulkader Jalloul is the Founder of DIPLO and a Project Management student at the University of Adelaide, with a strong interest in Australia's defence industry, complex project environments, and capability development.</p><p>He founded DIPLO after recognising a gap between university education and the practical expectations students encounter when entering industry. His focus is on creating opportunities for students to engage directly with defence organisations, develop greater industry awareness, and build the professional capabilities needed to contribute effectively in complex environments.</p><p>As Founder, Abdulkader leads DIPLO's strategic direction, industry and university engagement, and development of new partnerships and initiatives. His goal is to build a platform that brings students and industry closer together while strengthening the pathway for emerging talent into Australia's defence sector.</p></template>
+      </article>
+      <article class="member">
+        <button class="card" type="button" aria-haspopup="dialog">
+          <span class="frame"><img src="data:image/jpeg;base64,@@TEAM2@@" alt="Max Lintern"></span>
+          <span class="name">Max Lintern</span>
+          <span class="role">Director of Finance</span>
+          <span class="more">Read bio</span>
+        </button>
+        <template><p>Max Lintern is an emerging accounting professional whose ambition reflects the core purpose of DIPLO: developing industry-ready capability beyond the traditional boundaries of a university degree.</p><p>As a second-year Accounting student, Max brings a developing financial perspective to DIPLO, with a particular interest in the long-term economic opportunities created by South Australia's growing defence sector. As Director of Finance, he supports the initiative's financial sustainability and continued growth while gaining early exposure to the commercial considerations that underpin industry.</p><p>As the youngest member of the DIPLO leadership team, Max also represents an important part of DIPLO's mission &mdash; giving students the opportunity to build professional capability early, establish meaningful industry exposure, and begin shaping their career pathway well before graduation.</p></template>
+      </article>
+      <article class="member">
+        <button class="card" type="button" aria-haspopup="dialog">
+          <span class="frame"><img src="data:image/jpeg;base64,@@TEAM3@@" alt="Humam Al-Mihsinawi"></span>
+          <span class="name">Humam Al-Mihsinawi</span>
+          <span class="role">Director of Engineering Engagement</span>
+          <span class="more">Read bio</span>
+        </button>
+        <template><p>Humam Al-Mihsinawi is a third-year Mechanical Engineering student at the University of Adelaide and an AUKUS Propel Scholar, with a strong interest in defence engineering, emerging technologies, and complex problem-solving.</p><p>His interest in defence is driven by the opportunity to contribute to engineering of national significance while developing capabilities beyond the classroom. Being selected as an AUKUS Propel Scholar reflects his commitment to pursuing a career within Australia's defence industry.</p><p>As Director of Engineering Engagement at DIPLO, Humam works to strengthen the connection between engineering students and industry, helping students better understand professional expectations, explore defence career pathways, and enter industry prepared to contribute.</p></template>
+      </article>
+      <article class="member">
+        <button class="card" type="button" aria-haspopup="dialog">
+          <span class="frame"><img src="data:image/jpeg;base64,@@TEAM5@@" alt="Ahmad Ouban"></span>
+          <span class="name">Ahmad Ouban</span>
+          <span class="role">Director of Construction &amp; Infrastructure Engagement</span>
+          <span class="more">Read bio</span>
+        </button>
+        <template><p>Ahmad Ouban is the Director of Construction and Infrastructure Engagement at DIPLO and a final year Project Management student at the University of Adelaide, bringing hands-on experience from his family's commercial design-and-build firm in Adelaide.</p><p>Ahmad joined DIPLO after seeing first-hand how difficult it is for students to gain genuine construction experience, and how far ahead it puts graduates who have already worked within industry before finishing their studies. Ahmad's focus is on connecting students with the construction and infrastructure side of Australia's defence sector, one of the country's most significant growth industries, backed by sustained government investment and delivered through a mix of government-managed projects and private contracts with major national and international companies. This variety exposes students to different delivery models and stakeholder relationships, from government project teams to tier-one contractors and specialist subcontractors, building a well-rounded understanding of how large-scale infrastructure gets delivered.</p><p>As Director of Construction and Infrastructure Engagement, Ahmad leads DIPLO's engagement with construction and infrastructure partners, drawing on his own industry background to create direct pathways for student involvement, whether through site exposure, project shadowing, or structured placements with partner organisations, helping students step into the defence sector with real industry experience already behind them.</p></template>
+      </article>
+      <article class="member">
+        <button class="card" type="button" aria-haspopup="dialog">
+          <span class="frame"><img src="data:image/jpeg;base64,@@TEAM4@@" alt="Ajaay Sureiander"></span>
+          <span class="name">Ajaay Sureiander</span>
+          <span class="role">Director of Technology</span>
+          <span class="more">Read bio</span>
+        </button>
+        <template><p>Ajaay Sureiander is the Director of Technology at DIPLO and an AI engineer at Optimatics, where he builds LLM-based systems for enterprise data quality, having studied Computer Science (Advanced) at the University of Adelaide with a focus on artificial intelligence. He is also the co-founder of Titan Systems AI, an Adelaide consultancy that helps businesses work out where automation genuinely improves an outcome and where it does not.</p><p>Ajaay's interest in DIPLO comes from what he has seen inside real engineering environments: the gap between what students are taught and what industry expects is rarely technical ability, it is the practical judgement that only comes from working inside an organisation. Building a system that works is one part of the job; understanding the data, the security requirements, and the people it has to serve is what decides whether it survives contact with a business. Those constraints matter particularly in defence, where data security, sovereignty, and assurance shape what can actually be built, and where advanced technology, from artificial intelligence to autonomous systems, has become central to Australia's capability priorities and its commitments under AUKUS.</p><p>As Director of Technology, Ajaay leads DIPLO's digital platforms and its engagement with the technology side of the defence sector, drawing on his experience across enterprise engineering and running his own business to create pathways for students in software, data, and AI. His aim is for students to leave university having already worked on systems that had to function in the real world, with the professional judgement that comes with it.</p></template>
+      </article>
+    </div>
+  </div>
+  <dialog class="bio-dialog" id="bio-dialog" aria-labelledby="bio-name">
+    <div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close biography">&times;</button>
+      <div class="bio-name" id="bio-name"></div>
+      <div class="bio-role"></div>
+      <div class="bio-copy"></div>
+    </div>
+  </dialog>
 </section>
 
 <section id="program" class="stats">
@@ -352,6 +469,7 @@
     </div>
     <div class="foot-links">
       <a href="#who">Who we are</a>
+      <a href="#team">The team</a>
       <a href="#program">The program</a>
       <a href="#register">Register interest</a>
     </div>
@@ -376,6 +494,27 @@
     requestAnimationFrame(function f(now){var p=Math.min((now-s)/1100,1);p=1-Math.pow(1-p,3);el.textContent=Math.round(t*p)+sfx;if(p<1)requestAnimationFrame(f)});
   })},{threshold:.6});
   document.querySelectorAll('.stat .n[data-n]').forEach(function(el){el.textContent='0'+(el.getAttribute('data-suffix')||'');sio.observe(el)});
+  (function(){
+    var dlg=document.getElementById('bio-dialog');
+    if(!dlg)return;
+    var nameEl=dlg.querySelector('.bio-name'),roleEl=dlg.querySelector('.bio-role'),copyEl=dlg.querySelector('.bio-copy');
+    document.querySelectorAll('.member').forEach(function(m){
+      var btn=m.querySelector('button.card'),tpl=m.querySelector('template');
+      if(!btn||!tpl)return;
+      btn.addEventListener('click',function(){
+        nameEl.textContent=m.querySelector('.name').textContent;
+        roleEl.textContent=m.querySelector('.role').textContent;
+        copyEl.innerHTML='';
+        copyEl.appendChild(tpl.content.cloneNode(true));
+        dlg.querySelector('.bio-inner').scrollTop=0;
+        if(dlg.showModal){dlg.showModal()}else{dlg.setAttribute('open','')}
+      });
+    });
+    dlg.querySelector('.bio-close').addEventListener('click',function(){dlg.close()});
+    /* clicks that land on the dialog itself are backdrop clicks - the panel
+       fills the element, so anything else is caught by .bio-inner */
+    dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  })();
   (function(){
     var form=document.getElementById('eoi');
     var segBtns=form.querySelectorAll('.seg-btn');
