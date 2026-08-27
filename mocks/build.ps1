@@ -32,6 +32,7 @@ $tokens = @{
     'PLEX'    = 'font-IBMPlexSans-400.woff2'
     'MONO'    = 'font-IBMPlexMono-500.woff2'
     'MARK'    = 'mark.jpg'
+    'FAVICON' = 'favicon.png'
     'STACKED' = 'stacked.jpg'
     'HERO'    = 'hero-dark.jpg'
     'TEAM1'   = 'team-1.jpg'
