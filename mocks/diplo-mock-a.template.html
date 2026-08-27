@@ -428,10 +428,10 @@
       </div>
       <div class="field"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" type="text" autocomplete="name" required></div>
       <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" type="email" autocomplete="email" required></div>
-      <div class="field"><label for="f-phone">Phone (optional)</label>
+      <div class="field"><label for="f-phone">Phone <span class="req">*</span></label>
         <div class="phone-wrap">
           <select id="f-cc" aria-label="Country code"><option selected>+61</option><option>+64</option><option>+44</option><option>+1</option><option>+65</option><option>+91</option><option>Other</option></select>
-          <input id="f-phone" type="tel" autocomplete="tel" placeholder="4XX XXX XXX">
+          <input id="f-phone" type="tel" autocomplete="tel" placeholder="4XX XXX XXX" required>
         </div>
       </div>
       <div class="field role-student"><label for="f-degree">University &amp; degree</label><input id="f-degree" type="text" placeholder="e.g. Adelaide University — B. Project Management"></div>
@@ -561,6 +561,8 @@
     var n=document.getElementById('f-name'),m=document.getElementById('f-email');
     if(!n.value.trim()){n.focus();n.style.borderColor='#B0563F';return}
     if(!m.value.trim()||m.value.indexOf('@')<0){m.focus();m.style.borderColor='#B0563F';return}
+    var p=document.getElementById('f-phone');
+    if(!p.value.trim()){p.focus();p.style.borderColor='#B0563F';return}
 
     var role=form.getAttribute('data-role');
     function val(id){var el=document.getElementById(id);return el?el.value.trim():''}
@@ -572,7 +574,7 @@
       role:      role==='student'?'Student':'Industry professional',
       name:      val('f-name'),
       email:     val('f-email'),
-      phone:     phone?(val('f-cc')+' '+phone):'',
+      phone:     val('f-cc')+' '+phone,
       degree:    role==='student'?val('f-degree'):'',
       year:      role==='student'?val('f-year'):'',
       org:       role==='industry'?val('f-org'):'',
