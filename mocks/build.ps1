@@ -34,6 +34,11 @@ $tokens = @{
     'MARK'    = 'mark.jpg'
     'STACKED' = 'stacked.jpg'
     'HERO'    = 'hero-dark.jpg'
+    'TEAM1'   = 'team-1.jpg'
+    'TEAM2'   = 'team-2.jpg'
+    'TEAM3'   = 'team-3.jpg'
+    'TEAM4'   = 'team-4.jpg'
+    'TEAM5'   = 'team-5.jpg'
 }
 
 function Convert-ToBase64 {

@@ -68,9 +68,17 @@ but stores nothing, which is the correct behaviour for review builds.
 
 ## Notes
 
-- **Photography is placeholder.** The current images are public-domain U.S. Air
-  Force / U.S. Marine Corps photographs via Wikimedia Commons. Replace them with
-  licensed or cleared imagery before launch.
+- **Photography is placeholder.** The hero and register-panel images are
+  public-domain U.S. Air Force / U.S. Marine Corps photographs via Wikimedia
+  Commons. Replace them with licensed or cleared imagery before launch.
+- **Team portraits.** `mocks/assets/team-1.jpg` to `team-5.jpg` are team
+  members' headshots, resized to 675x900 (3:4, matching the card frame) and
+  inlined into the page like every other asset. All five sit on the site's own
+  black (`--ink`, #08090B) rather than a studio backdrop, so the cards read as
+  one set - match that when adding another. They are identifiable
+  photographs of real people published on a public site and in a public
+  repository - confirm each person consents to that before launch, and keep the
+  names beneath them accurate.
 - **Non-affiliation.** The industry names shown on the page are presented as the
   sector students prepare for, alongside an explicit disclaimer. DIPLO is an
   independent, student-led educational initiative, is not affiliated with or
